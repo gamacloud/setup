@@ -36,7 +36,7 @@ add-apt-repository \
     stable"
 apt-get update && apt-get install docker-ce=18.06.2~ce~3-0~ubuntu
 
-echo "Configuring DOcker Service..."
+echo "Configuring Docker Service..."
 cat > /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=cgroupfs"],
@@ -72,8 +72,12 @@ apt-mark hold kubelet kubeadm kubectl
 # Init Kubernetes
 n
 echo "4. Init Kubernetes"
-kubeadm init --pod-network-cidr=10.244.0.0/16 > $(pwd)/kubeadm_init.log
+sudo kubeadm init --apiserver-advertise-address=192.168.191.55 --pod-network-cidr=10.244.0.0/16 > $(pwd)/kubeadm_init.log
 n
+echo "Configuring Kubectl Command"
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 n
 echo "SAVE THE TOKEN OF CERT KUBEADM"
 enter
