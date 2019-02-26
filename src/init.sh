@@ -22,7 +22,8 @@ enter
 n
 echo "Disabling the resolvconf mechanism for updating resolv.conf and just use a static resolv.conf file.."
 sudo rm -f /etc/resolv.conf
-sudo echo "nameserver 8.8.4.4\nnameserver 8.8.8.8" > /etc/resolv.conf
+sudo echo "nameserver 8.8.4.4" > /etc/resolv.conf
+sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 
 # Install Docker
 n
