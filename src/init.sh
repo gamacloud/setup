@@ -16,8 +16,9 @@ fi
 n
 echo "1. Modifying DNS Config at /etc/NetworkManager/NetworkManager.conf to resolve CoreDNS Issue"
 echo "\nYou will be redirected to vim, please comment out 'dns=dnsmasq'\n"
-sudo vim /etc/NetworkManager/NetworkManager.conf
+sudo vim /etc/NetworkManager/NetworkManager.conf < `tty` > `tty`
 sudo service network-manager restart
+enter
 n
 echo "Disabling the resolvconf mechanism for updating resolv.conf and just use a static resolv.conf file.."
 sudo rm -f /etc/resolv.conf
