@@ -1,7 +1,3 @@
-enter (){
-    read -p "Press enter to continue..."
-}
-
 n (){
     echo "\n"
 }
@@ -16,14 +12,14 @@ fi
 n
 echo "1. Modifying DNS Config at /etc/NetworkManager/NetworkManager.conf to resolve CoreDNS Issue"
 echo "\nYou will be redirected to vim, please comment out 'dns=dnsmasq'\n"
-sudo vim /etc/NetworkManager/NetworkManager.conf < `tty` > `tty`
-sudo service network-manager restart
-enter
+# sudo vim /etc/NetworkManager/NetworkManager.conf < `tty` > `tty`
+# sudo service network-manager restart
+read -p "Press enter to continue..."
 n
 echo "Disabling the resolvconf mechanism for updating resolv.conf and just use a static resolv.conf file.."
-sudo rm -f /etc/resolv.conf
-sudo echo "nameserver 8.8.4.4" > /etc/resolv.conf
-sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+# sudo rm -f /etc/resolv.conf
+# sudo echo "nameserver 8.8.4.4" > /etc/resolv.conf
+# sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 
 # Install Docker
 n
@@ -55,7 +51,7 @@ echo "Restarting Docker Service..."
 # Restart docker.
 systemctl daemon-reload
 systemctl restart docker
-enter
+read -p "Press enter to continue..."
 
 # Install Kubeadm
 n
@@ -82,9 +78,9 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 n
 echo "SAVE THE TOKEN OF CERT KUBEADM"
-enter
+read -p "Press enter to continue..."
 echo "Are you sure already save them?"
-enter
+read -p "Press enter to continue..."
 
 # Install Kubernetes CNI
 n
